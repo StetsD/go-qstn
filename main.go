@@ -6,5 +6,9 @@ import (
 )
 
 func main() {
-	fmt.Println(code.Join("Boris", "Uriy", "Yakov"))
+	fmt.Println(code.Code_01("Boris", "Uriy", "Yakov"))
+	code.Code_02()
+	code.Code_03()
+	code.Code_04()
+	code.Code_05()
 }
