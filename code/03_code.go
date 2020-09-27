@@ -2,17 +2,22 @@ package code
 
 import (
 	"fmt"
-	"time"
+	//"sync"
 )
 
+// Что можно сделать, чтобы сохранить последовательность слайса с учетом параллельного перебора ?
+
 func Code_03() {
+	//mu := sync.Mutex{}
+	var result []string
 	words := []string{"foo", "bar", "baz"}
 	done := make(chan bool)
 	defer close(done)
 	for _, word := range words {
+		//mu.Lock()
 		go func(word string) {
-			time.Sleep(1 * time.Second)
-			fmt.Println(word)
+			result = append(result, word)
+			//mu.Unlock()
 			done <- true
 		}(word)
 	}
@@ -20,4 +25,6 @@ func Code_03() {
 	for range words {
 		<-done
 	}
+
+	fmt.Println(result)
 }
